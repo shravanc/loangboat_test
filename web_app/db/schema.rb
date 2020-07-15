@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_07_15_124939) do
     t.string "confirmation_token"
     t.boolean "verified", default: false
     t.string "email"
-    t.integer "failure_count"
+    t.integer "failure_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

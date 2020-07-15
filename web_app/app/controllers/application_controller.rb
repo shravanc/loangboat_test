@@ -10,6 +10,12 @@ def validate_username
   if user.nil?
     render json: {message: 'Invalid username'}, status: :unauthorized
     return
+  elsif !user.verified
+    render json: {message: 'Account not verified'}
+    return
+  elsif user.failure_count > 3
+    render json: {message: 'Maximum attempt reached'}, status: :unauthorized
+    return
   end
   params[:user] = user
 end

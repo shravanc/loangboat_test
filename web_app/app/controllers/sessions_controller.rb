@@ -6,8 +6,7 @@ def create
   session = Session.new
   status, data = session.create(params)
   if status
-    render :show
-    #render json: data, status: :created
+    render json: data, status: :created
   else
     render json: data, status: :unprocessable_entity
   end
