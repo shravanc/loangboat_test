@@ -5,10 +5,7 @@ belongs_to :user
 
 def create params
   user = params[:user]
-  status, data = user.validate_credentials( params \
-                                .require(:session) \
-                                .permit( [:username, :password])
-                                          )
+  status, data = user.validate_credentials(session_params(params))
   unless status
     return [false, data]
   end
@@ -20,7 +17,7 @@ end
 
 private
 
-def session_params
+def session_params params
   params.require(:session).permit([:username, :password])
 end
 

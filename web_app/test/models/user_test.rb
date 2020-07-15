@@ -23,20 +23,19 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'Valid User parameters' do
-    @user = users(:user_1)
-    assert @user.valid? 
+    user = users(:user_1)
+    assert user.valid? 
   end
 
   test 'Session Association' do 
-    @user = users(:user_1)
-    assert_equal 1, @user.sessions.size
+    user = users(:user_1)
+    assert_equal 1, user.sessions.size
   end
 
   test 'Destroy User' do
-    @sessions = sessions(:user_1_session)
-    @user = @sessions.user
-    @user.destroy
-    p Session.count
+    sessions = sessions(:user_1_session)
+    user = sessions.user
+    user.destroy
     assert_equal 0, Session.count
   end
 
