@@ -19,8 +19,6 @@ def index
 end
 
 def validate_credentials params
-  return [false, {message: 'Account not verified'}] unless self.verified
-  #return [false, {message: 'Maximum attempt reached'}] if self.failure_count > 3
 
   encrpyt_pass = encrypt_password params[:password], self.password_salt
   if encrpyt_pass == self.password

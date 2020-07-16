@@ -4,31 +4,42 @@ before_action :validate_username, only: :create
 def new
 end
 
-
 def index
   @user = User.last
 end
 
 def create
-  session = Session.new
-  status, data = session.create(params)
+  status, data = @current_user.validate_credentials(credentials)
   if status
-    @user = params[:user]
-    @session_id = data[:session_id]
-    render 
-    return
+    session = Session.new(session_attributes)
+    if session.save
+      @session_id = session.session_id
+      render
+    else
+      render_error(session, :unprocessable_entity)
+    end
   else
+    flash[:invalid_credentials] = data[:message]
     redirect_to :action => "new"
   end
-end
-
-def show
 end
 
 def destroy
   session = Session.find_by_session_id(params[:id])
   session.destroy
+  flash[:notice] = "You are successfully Logged out"
   redirect_to :action => "new"
+end
+
+
+private 
+
+def credentials
+  params.require(:session).permit([:username, :password])
+end
+
+def session_attributes
+  {session_id: SecureRandom.hex(10), user_id: @current_user.id}
 end
 
 

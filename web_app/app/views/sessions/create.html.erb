@@ -12,10 +12,8 @@
 <body>
 
 <div class="container">
-  <h2>Name: <%= @user.firstname %></h2>
+  <h2>Name: <%= @current_user.firstname %></h2>
   <%= link_to 'Sign Out', session_path(@session_id), :method => :delete %>
-
-
 </div>
 
 </body>
