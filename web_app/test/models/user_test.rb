@@ -2,14 +2,21 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
-  test 'test Username to be a mandatory Field' do
+  test 'Username to be a mandatory Field' do
     user = User.create(email: 'sample@gmail.com', password: 'welcome')
     assert_not user.valid?
   end
 
-  test 'test Email to be mandatory mandatory Field' do
+  test 'Email to be mandatory mandatory Field' do
     user = User.create(username: 'sample', password: 'welcome')
     assert_not user.valid?
+  end
+
+  test 'Unique username test' do
+    user_1 = User.create(username: 'sample', email: 'sample@gmail.com', password: 'welcome')
+    user_2 = User.create(username: 'sample', email: 'sample@gmail.com', password: 'welcome')
+    assert user_1.valid?
+    assert_not user_2.valid?
   end
 
   test 'Password encryption' do
@@ -32,7 +39,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 1, user.sessions.size
   end
 
-  test 'Destroy User' do
+  test 'Destroy User should delete associated sessions' do
     sessions = sessions(:user_1_session)
     user = sessions.user
     user.destroy

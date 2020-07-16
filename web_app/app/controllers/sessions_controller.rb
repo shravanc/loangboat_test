@@ -1,13 +1,11 @@
 class SessionsController < ApplicationController
 before_action :validate_username, only: :create
 
+# Form for User Login
 def new
 end
 
-def index
-  @user = User.last
-end
-
+# Create Session for User with the Form data
 def create
   status, data = @current_user.validate_credentials(credentials)
   if status
@@ -24,6 +22,7 @@ def create
   end
 end
 
+# 
 def destroy
   session = Session.find_by_session_id(params[:id])
   session.destroy

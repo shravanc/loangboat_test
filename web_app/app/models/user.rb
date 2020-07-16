@@ -15,9 +15,6 @@ def create params
   return [true, message]
 end
 
-def index
-end
-
 def validate_credentials params
 
   encrpyt_pass = encrypt_password params[:password], self.password_salt

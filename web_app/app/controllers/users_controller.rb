@@ -5,7 +5,6 @@ def index
 end
 
 def create
-  Rails.logger.warn("------------->#{params}")
   user = User.new
   status, data = user.create(params)
   if status
