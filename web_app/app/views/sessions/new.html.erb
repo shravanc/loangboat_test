@@ -16,11 +16,11 @@
   <form action="/sessions" method="post">
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="sting" class="form-control" id="email" placeholder="Enter username" name="session[username]" value="shravanc">
+      <input type="sting" class="form-control" id="email" placeholder="Enter username" name="session[username]" value="admin1">
     </div>
     <div class="form-group">
       <label for="password">Password:</label>
-      <input type="password" class="form-control" id="password" placeholder="Enter password" name="session[password]" value="welcome">
+      <input type="password" class="form-control" id="password" placeholder="Enter password" name="session[password]" value="password123">
     </div>
     <% if flash[:invalid_credentials] %>
       <div class="notice"><%= flash[:invalid_credentials] %></div>
