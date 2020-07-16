@@ -14,13 +14,13 @@ def create
     session = Session.new(session_attributes)
     if session.save
       @session_id = session.session_id
-      render
+      render :create, status: :created
     else
       render_error(session, :unprocessable_entity)
     end
   else
     flash[:invalid_credentials] = data[:message]
-    redirect_to :action => "new"
+    redirect_to :action => "new"#, status: :unprocessable_entity
   end
 end
 
@@ -28,7 +28,7 @@ def destroy
   session = Session.find_by_session_id(params[:id])
   session.destroy
   flash[:notice] = "You are successfully Logged out"
-  redirect_to :action => "new"
+  redirect_to :action => "new"#, status: :ok
 end
 
 

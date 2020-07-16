@@ -14,7 +14,10 @@ def validate_username
     render json: {message: 'Account not verified'}, status: :unauthorized
     return
   elsif user.failure_count >= 3
-    render json: {message: 'Maximum attempt reached'}, status: :unauthorized
+    flash[:invalid_credentials] = 'Maximum Attempt Reached!'
+    redirect_to :action => "new"#, status: :locked
+
+    #render json: {message: 'Maximum attempt reached'}, status: :unauthorized
     return
   end
   @current_user = user
