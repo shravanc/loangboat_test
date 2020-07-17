@@ -13,13 +13,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :found
   end
 
-  test 'Invalid Creatials' do
+  test 'Invalid Credentials' do
     user = user = User.create(username: 'sample', email: 'sample@gmail.com', password: 'password', verified: true)
     post '/sessions', params: { 'session': { 'username': user.username, 'password': 'invalid_password' } }
     assert_response :found
   end
 
-  test 'Invalid Creatials for more than 3 times' do
+  test 'Invalid Credentials for more than 3 times' do
     user = user = User.create(username: 'sample', email: 'sample@gmail.com', password: 'password', verified: true)
     post '/sessions', params: { 'session': { 'username': user.username, 'password': 'invalid_password' } }
     post '/sessions', params: { 'session': { 'username': user.username, 'password': 'invalid_password' } }
@@ -29,7 +29,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal flash[:invalid_credentials], 'Maximum Attempt Reached!'
   end
 
-  test 'Resetting Failed count after successful login' do
+  test 'Restting failed count after successful login' do
     user = user = User.create(username: 'sample', email: 'sample@gmail.com', password: 'password', verified: true)
     post '/sessions', params: { 'session': { 'username': user.username, 'password': 'invalid_password' } }
     post '/sessions', params: { 'session': { 'username': user.username, 'password': 'invalid_password' } }

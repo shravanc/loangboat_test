@@ -10,29 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_200_715_124_939) do
+ActiveRecord::Schema.define(version: 2020_07_15_124939) do
+
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'sessions', force: :cascade do |t|
-    t.string 'session_id'
-    t.integer 'user_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "sessions", force: :cascade do |t|
+    t.string "session_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'username'
-    t.string 'firstname'
-    t.string 'lastname'
-    t.string 'password_salt'
-    t.string 'encrypted_password'
-    t.string 'password'
-    t.string 'confirmation_token'
-    t.boolean 'verified', default: false
-    t.string 'email'
-    t.integer 'failure_count', default: 0
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "firstname"
+    t.string "lastname"
+    t.string "password_salt"
+    t.string "encrypted_password"
+    t.string "password"
+    t.string "confirmation_token"
+    t.boolean "verified", default: false
+    t.string "email"
+    t.integer "failure_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
+
 end
