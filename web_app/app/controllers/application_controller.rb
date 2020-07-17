@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
       flash[:invalid_credentials] = 'Invalid username'
       redirect_to action: 'new'
     elsif !user.verified
-      render json: { message: 'Account not verified' }, status: :unauthorized
+      flash[:invalid_credentials] = 'Account not verified'
       redirect_to action: 'new'
     elsif user.failure_count >= 3
       flash[:invalid_credentials] = 'Maximum Attempt Reached!'

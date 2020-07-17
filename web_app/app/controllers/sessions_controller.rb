@@ -13,12 +13,12 @@ class SessionsController < ApplicationController
         @session_id = session.session_id
         render :create, status: :created
       else
-        render_error(session, :unprocessable_entity)
+        flash[:invalid_credentials] = 'Please try again!'
       end
     else
       flash[:invalid_credentials] = data[:message]
-      redirect_to action: 'new' # , status: :unprocessable_entity
     end
+    redirect_to action: 'new'
   end
 
   # Log out API request, to delete session for a User
@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
     session = Session.find_by_session_id(params[:id])
     session.destroy
     flash[:notice] = 'You are successfully Logged out'
-    redirect_to action: 'new' # , status: :ok
+    redirect_to action: 'new'
   end
 
   private
